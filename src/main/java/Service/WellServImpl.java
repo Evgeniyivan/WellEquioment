@@ -30,7 +30,6 @@ public class WellServImpl implements WellServ {
 
     @Override
     public void fillTable(String wellName, int amountEquipment) throws SQLException {
-        // Вычисляем id для скважины wellName и записываем этот id в переменную idWell
         PreparedStatement ps = connection.prepareStatement("SELECT id FROM Well WHERE name = ?");
         ps.setString(1, wellName);
         ResultSet resultSet = ps.executeQuery();
@@ -39,7 +38,6 @@ public class WellServImpl implements WellServ {
             idWell = resultSet.getInt("id");
 
         if (idWell == 0) {
-            // Создаём новую скважину в таблице Well с именем wellName
             PreparedStatement ps2 = connection.prepareStatement("INSERT INTO Well (name) VALUES (?)");
             ps2.setString(1, wellName);
             ps2.executeUpdate();
